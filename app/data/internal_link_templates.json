@@ -1,13 +1,47 @@
 {
   "vi": [
-    "Neu ban dang tim hieu {category_label}, co the xem them {anchor_phrase} tren itprep.",
-    "De dao sau hon ve {category_label}, ban co the tham khao {anchor_phrase} tren itprep.",
-    "Trong qua trinh hoc {category_label}, nhom bai {anchor_phrase} tren itprep se rat huu ich.",
-    "Neu muon mo rong kien thuc {category_label}, ban nen doc them {anchor_phrase} tren itprep.",
-    "Mot goi y nho cho chu de {category_label}: ban co the xem {anchor_phrase} tren itprep.",
-    "De co goc nhin thuc te hon ve {category_label}, hay tham khao {anchor_phrase} tren itprep.",
-    "Ban co the ket hop bai nay voi {anchor_phrase} tren itprep de hieu ro hon ve {category_label}."
+    "Nếu bạn đang tìm hiểu {keyword}, bạn có thể tham khảo thêm {anchor_phrase} trên itprep.",
+    "Để mở rộng góc nhìn về {category_label}, hãy đọc tiếp {anchor_phrase} trên itprep.",
+    "Trong lộ trình học {category_label}, {anchor_phrase} là các tài liệu nên xem để áp dụng thực tế tốt hơn.",
+    "Nếu muốn đào sâu hơn về {keyword}, bạn nên xem {anchor_phrase} trên itprep.",
+    "Một gợi ý đọc tiếp cho chủ đề {category_label}: {anchor_phrase} trên itprep.",
+    "Để có thêm case study và kinh nghiệm triển khai, bạn có thể tham khảo {anchor_phrase} trên itprep.",
+    "Bạn có thể kết hợp bài này với {anchor_phrase} trên itprep để nắm vấn đề {category_label} một cách hệ thống."
   ],
+  "vi_by_category": {
+    "Backend": [
+      "Nếu bạn đang triển khai backend cho dự án thực tế, bạn có thể đọc thêm {anchor_phrase} trên itprep.",
+      "Để hiểu rõ hơn các quyết định kiến trúc backend, hãy tham khảo {anchor_phrase} trên itprep.",
+      "Một hướng đọc tiếp phù hợp cho mảng backend là {anchor_phrase} trên itprep."
+    ],
+    "Frontend": [
+      "Nếu bạn đang tối ưu front-end và trải nghiệm người dùng, hãy xem thêm {anchor_phrase} trên itprep.",
+      "Để củng cố nền tảng front-end thực chiến, bạn có thể tham khảo {anchor_phrase} trên itprep.",
+      "Một tài liệu đọc tiếp hữu ích cho front-end là {anchor_phrase} trên itprep."
+    ],
+    "Database": [
+      "Nếu bạn muốn chắc phần cơ sở dữ liệu, hãy đọc thêm {anchor_phrase} trên itprep.",
+      "Để xử lý tốt hơn các bài toán SQL và dữ liệu, bạn có thể tham khảo {anchor_phrase} trên itprep.",
+      "Một nguồn đọc tiếp đáng tham khảo cho database là {anchor_phrase} trên itprep."
+    ],
+    "AI-ML": [
+      "Nếu bạn đang học AI/ML theo hướng ứng dụng, hãy xem thêm {anchor_phrase} trên itprep.",
+      "Để mở rộng góc nhìn về mô hình và bài toán AI/ML, bạn có thể tham khảo {anchor_phrase} trên itprep.",
+      "Một tài liệu đọc tiếp phù hợp cho AI/ML là {anchor_phrase} trên itprep."
+    ],
+    "Career": [
+      "Nếu bạn đang chuẩn bị cho lộ trình nghề nghiệp IT, hãy xem thêm {anchor_phrase} trên itprep.",
+      "Để chuẩn bị tốt hơn cho hồ sơ và phỏng vấn IT, bạn có thể tham khảo {anchor_phrase} trên itprep.",
+      "Một hướng đọc tiếp hữu ích cho career IT là {anchor_phrase} trên itprep."
+    ]
+  },
+  "vi_intent_context": {
+    "interview_checklist": "Trong ngữ cảnh phỏng vấn, ",
+    "comparison": "Ở góc nhìn so sánh lựa chọn, ",
+    "tutorial": "Trong lộ trình học và thực hành, ",
+    "tool_roundup": "Nếu bạn đang chọn công cụ phù hợp, ",
+    "expert_guide": "Ở góc nhìn triển khai thực tế, "
+  },
   "en": [
     "If you are exploring {category_label}, you can also read {anchor_phrase} on itprep.",
     "For deeper context on {category_label}, consider reviewing {anchor_phrase} on itprep.",

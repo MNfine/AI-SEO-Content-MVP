@@ -9,6 +9,8 @@ def test_enrich_seo_links_uses_curated_internal_links():
     assert "itprep" in enriched
     assert "backend" in enriched
     assert "https://itprep.com.vn/fastapi-vs-django-for-backend/" in enriched
+    assert "css-flexbox-grid-cheat-sheet" not in enriched
+    assert "javascript-es6-cheat-sheet" not in enriched
     assert "href=\"/articles" not in enriched
 
 

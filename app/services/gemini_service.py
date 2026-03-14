@@ -636,6 +636,7 @@ The content_html must contain valid semantic HTML with headings, paragraphs, and
             keyword=keyword,
             language=language,
             base_url=self.settings.wordpress_base_url,
+            intent=intent,
         )
         return payload
 
@@ -738,6 +739,7 @@ The content_html must contain valid semantic HTML with headings, paragraphs, and
                 keyword=keyword,
                 language=language,
                 base_url=self.settings.wordpress_base_url,
+                intent=intent,
             )
             self._save_raw_response_debug(
                 keyword=keyword,

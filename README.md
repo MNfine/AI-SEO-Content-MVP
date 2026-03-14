@@ -75,6 +75,10 @@ pip install -r requirements.txt
 - He thong chi lay internal link tu file nay de gan vao bai viet.
 - Neu can cap nhat link, chi sua file JSON tren, khong can sua code.
 - Team content co the chinh 7+ mau cau trong file template JSON ma khong can sua code.
+- Trong file template co the tuy bien theo:
+  - `vi`: mau cau tieng Viet chung
+  - `vi_by_category`: mau cau theo tung danh muc (Backend/Frontend/...)
+  - `vi_intent_context`: tien to theo intent bai viet (phong van, tutorial, so sanh...)
 
 Neu chua co WordPress credentials, giu `WORDPRESS_MOCK_PUBLISH=true` de van test full flow publish.
 Khi co WordPress that, dat `WORDPRESS_MOCK_PUBLISH=false` va dien day du 3 bien WordPress.
