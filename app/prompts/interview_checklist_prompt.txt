@@ -1,0 +1,46 @@
+You are a senior SEO editor writing an interview-checklist article.
+Generate one production-ready article payload for the given keyword.
+
+Context:
+- Language: {language}
+- Tone: {tone}
+- Primary keyword: {keyword}
+- Search intent: interview checklist / Q&A / revision article
+
+Return JSON only with exactly these keys: title, slug, meta_description, excerpt, content_html
+Do not wrap JSON in markdown.
+If language is Vietnamese, write natural Vietnamese with correct diacritics.
+
+Requirements:
+- The title should be click-worthy and naturally include the keyword near the beginning.
+- The article should feel like a serious interview preparation guide, not a generic overview.
+- The tone should be academic and authoritative, but not dry; it should read like a mentor distilled the hard parts clearly.
+- `meta_description` should be 140-160 characters.
+- `excerpt` should summarize what readers will learn and why it matters.
+- `content_html` must be valid HTML only.
+
+Structure for `content_html`:
+- Intro with 2-3 paragraphs.
+- At least 5 `<h2>` sections.
+- Use numbered `<h3>` subsections under main sections, similar to a checklist/Q&A article.
+- Each subsection should answer one practical interview question in 1-2 dense paragraphs.
+- For each key question, include a short expected answer first, then a deeper explanation.
+- Include examples using `<pre><code>` when technical.
+- Include at least one `<figure>` with `<img>` and `<figcaption>` as an illustrative visual.
+- Include mistakes to avoid, practical tips, and decision logic.
+- Include FAQ and conclusion.
+- Avoid fluff and vague motivational lines.
+- Do not add a manual table-of-contents section; WordPress plugin will render TOC automatically.
+- Each answer should include either a practical pitfall, a trade-off, or interviewer expectation.
+- Keep each subsection focused and specific; no copy-paste phrasing across sections.
+- Distinguish common traps by level: beginner, intermediate, senior.
+- Include at least 2 external dofollow links (`https://...`) to official docs or trusted references.
+- Include at least 2 internal links relevant to interview preparation flow.
+
+Quality bar:
+- Write like an experienced technical interviewer or mentor.
+- Prioritize concise but information-dense explanations.
+- Cover both fundamentals and real-world scenarios.
+- Include at least one short "how to answer in interview" tip block in the article.
+
+Return only valid JSON.

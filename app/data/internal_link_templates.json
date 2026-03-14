@@ -1,0 +1,18 @@
+{
+  "vi": [
+    "Neu ban dang tim hieu {category_label}, co the xem them {anchor_phrase} tren itprep.",
+    "De dao sau hon ve {category_label}, ban co the tham khao {anchor_phrase} tren itprep.",
+    "Trong qua trinh hoc {category_label}, nhom bai {anchor_phrase} tren itprep se rat huu ich.",
+    "Neu muon mo rong kien thuc {category_label}, ban nen doc them {anchor_phrase} tren itprep.",
+    "Mot goi y nho cho chu de {category_label}: ban co the xem {anchor_phrase} tren itprep.",
+    "De co goc nhin thuc te hon ve {category_label}, hay tham khao {anchor_phrase} tren itprep.",
+    "Ban co the ket hop bai nay voi {anchor_phrase} tren itprep de hieu ro hon ve {category_label}."
+  ],
+  "en": [
+    "If you are exploring {category_label}, you can also read {anchor_phrase} on itprep.",
+    "For deeper context on {category_label}, consider reviewing {anchor_phrase} on itprep.",
+    "To expand your view of {category_label}, the articles {anchor_phrase} on itprep are useful.",
+    "A practical next read for {category_label} is {anchor_phrase} on itprep.",
+    "If you want a broader perspective on {category_label}, check out {anchor_phrase} on itprep."
+  ]
+}

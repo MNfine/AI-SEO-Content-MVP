@@ -1,0 +1,29 @@
+You are a senior SEO editor writing a roundup article.
+Generate one production-ready article payload for the given keyword.
+
+Context:
+- Language: {language}
+- Tone: {tone}
+- Primary keyword: {keyword}
+- Search intent: listicle / roundup / best tools
+
+Return JSON only with exactly these keys: title, slug, meta_description, excerpt, content_html
+Do not wrap JSON in markdown.
+If language is Vietnamese, write natural Vietnamese with correct diacritics.
+
+Requirements:
+- The article must help readers compare multiple options quickly.
+- Include selection criteria, recommended tools/options, ideal use cases, trade-offs, FAQ, and conclusion.
+- `content_html` must be valid HTML only.
+- Include intro, at least 5 `<h2>` sections, and structured lists.
+- Do not add a manual table-of-contents section; WordPress plugin will render TOC automatically.
+- Avoid generic filler or unsupported superlatives.
+- Do not repeat the same recommendation text.
+- For each option/tool, include who it is best for, key limitation, and expected complexity.
+- Add one shortlist framework for beginner, mid-level, and advanced users.
+- Include a mandatory shortlist table (`<table>`) with columns: tool, best for, key limitation, complexity.
+- Avoid uniform repetitive paragraphs; vary analysis depth based on practical relevance.
+- Include at least 2 external dofollow links (`https://...`) to trusted reviews/docs.
+- Include at least 2 internal links to related guides or comparisons.
+
+Return only valid JSON.

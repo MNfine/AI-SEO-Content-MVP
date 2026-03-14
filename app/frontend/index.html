@@ -1,0 +1,499 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI SEO Content MVP UI</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=IBM+Plex+Mono:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #f5f1e9;
+      --card: #fffaf2;
+      --line: #d8c6ac;
+      --ink: #172020;
+      --ink-soft: #455252;
+      --accent: #006d5b;
+      --accent-2: #f26a2e;
+      --danger: #be2338;
+      --ok: #1c7c54;
+      --shadow: 0 16px 48px rgba(15, 28, 24, 0.14);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: "Syne", sans-serif;
+      color: var(--ink);
+      background:
+        radial-gradient(circle at 10% 10%, rgba(242, 106, 46, 0.18), transparent 42%),
+        radial-gradient(circle at 88% 30%, rgba(0, 109, 91, 0.16), transparent 40%),
+        linear-gradient(180deg, #f8f4ec 0%, #efe7da 100%);
+      min-height: 100vh;
+      animation: fadeIn 420ms ease-out;
+    }
+
+    .wrap {
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 32px 18px 48px;
+    }
+
+    .hero {
+      margin-bottom: 22px;
+      border: 2px solid var(--line);
+      background: linear-gradient(135deg, #fff8ef 0%, #fdf3e4 100%);
+      border-radius: 20px;
+      padding: 18px 20px;
+      box-shadow: var(--shadow);
+      transform-origin: top left;
+      animation: heroIn 520ms cubic-bezier(.22,.61,.36,1);
+    }
+
+    .eyebrow {
+      font-family: "IBM Plex Mono", monospace;
+      font-size: 12px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--ink-soft);
+      margin-bottom: 6px;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: clamp(1.35rem, 3vw, 2.35rem);
+      line-height: 1.06;
+      letter-spacing: -0.02em;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 16px;
+    }
+
+    .card {
+      border: 2px solid var(--line);
+      border-radius: 20px;
+      background: var(--card);
+      box-shadow: var(--shadow);
+      padding: 16px;
+      opacity: 0;
+      transform: translateY(12px);
+      animation: rise 360ms ease-out forwards;
+    }
+
+    .card:nth-child(2) {
+      animation-delay: 110ms;
+    }
+
+    .card:nth-child(3) {
+      animation-delay: 200ms;
+    }
+
+    .card h2 {
+      margin-top: 0;
+      margin-bottom: 12px;
+      font-size: 1.05rem;
+      letter-spacing: 0.01em;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 6px;
+      font-size: 0.9rem;
+      font-weight: 600;
+    }
+
+    input, select {
+      width: 100%;
+      border: 2px solid #cab498;
+      border-radius: 12px;
+      font-size: 0.95rem;
+      padding: 10px 12px;
+      background: #fffcf7;
+      font-family: "IBM Plex Mono", monospace;
+    }
+
+    input:focus, select:focus {
+      outline: none;
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px rgba(0, 109, 91, 0.18);
+    }
+
+    .row {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 12px;
+      margin-bottom: 12px;
+    }
+
+    .actions {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-top: 6px;
+    }
+
+    button {
+      border: 0;
+      border-radius: 999px;
+      padding: 10px 16px;
+      font-size: 0.93rem;
+      font-weight: 700;
+      letter-spacing: 0.01em;
+      cursor: pointer;
+      transition: transform 120ms ease, filter 120ms ease;
+    }
+
+    button:active {
+      transform: translateY(1px);
+    }
+
+    .btn-main {
+      background: var(--accent);
+      color: #ffffff;
+    }
+
+    .btn-secondary {
+      background: var(--accent-2);
+      color: #111111;
+    }
+
+    .btn-outline {
+      border: 2px solid var(--ink);
+      background: transparent;
+      color: var(--ink);
+    }
+
+    button:hover {
+      filter: brightness(1.05);
+      transform: translateY(-1px);
+    }
+
+    .meta {
+      display: grid;
+      gap: 8px;
+      font-family: "IBM Plex Mono", monospace;
+      font-size: 0.86rem;
+      color: var(--ink-soft);
+      margin-bottom: 8px;
+    }
+
+    .status {
+      border-radius: 999px;
+      display: inline-block;
+      padding: 4px 10px;
+      font-size: 0.75rem;
+      font-family: "IBM Plex Mono", monospace;
+      border: 1px solid #c9b290;
+      background: #f8eddc;
+    }
+
+    .status.ok {
+      background: #daf3e8;
+      border-color: #8ccdaf;
+      color: var(--ok);
+    }
+
+    .status.error {
+      background: #fde2e7;
+      border-color: #ed9aa8;
+      color: var(--danger);
+    }
+
+    .content {
+      border: 1px solid #dcc6a8;
+      border-radius: 12px;
+      background: #fffdf9;
+      padding: 12px;
+      min-height: 180px;
+      overflow-x: auto;
+      line-height: 1.7;
+    }
+
+    .content h2 {
+      margin-top: 1.3rem;
+      margin-bottom: 0.5rem;
+      font-size: 1.15rem;
+    }
+
+    .content h3 {
+      margin-top: 1rem;
+      margin-bottom: 0.35rem;
+      font-size: 1rem;
+    }
+
+    .content p,
+    .content li {
+      font-family: Georgia, "Times New Roman", serif;
+      color: #273130;
+      font-size: 0.98rem;
+    }
+
+    .content ul,
+    .content ol {
+      padding-left: 1.25rem;
+    }
+
+    .content pre {
+      overflow-x: auto;
+      padding: 12px;
+      border-radius: 12px;
+      background: #1c2528;
+      color: #f4f1ea;
+    }
+
+    .content .article-figure {
+      margin: 1rem 0;
+      border: 1px solid #dcc6a8;
+      border-radius: 16px;
+      overflow: hidden;
+      background: #f9f4eb;
+    }
+
+    .content .article-figure img {
+      display: block;
+      width: 100%;
+      height: auto;
+    }
+
+    .content .article-figure figcaption {
+      padding: 10px 12px;
+      font-size: 0.87rem;
+      color: #5c6665;
+      font-family: "IBM Plex Mono", monospace;
+    }
+
+    .log {
+      margin-top: 8px;
+      font-family: "IBM Plex Mono", monospace;
+      font-size: 0.82rem;
+      color: var(--ink-soft);
+      min-height: 1.2em;
+    }
+
+    @media (min-width: 880px) {
+      .grid {
+        grid-template-columns: 380px 1fr;
+      }
+
+      .card-wide {
+        grid-column: span 2;
+      }
+
+      .row {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    @keyframes heroIn {
+      from { opacity: 0; transform: translateY(-14px) scale(0.995); }
+      to { opacity: 1; transform: translateY(0) scale(1); }
+    }
+
+    @keyframes rise {
+      to { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+</head>
+<body>
+  <main class="wrap">
+    <section class="hero">
+      <div class="eyebrow">FastAPI + Gemini + WordPress</div>
+      <h1>AI SEO Studio</h1>
+    </section>
+
+    <section class="grid">
+      <article class="card">
+        <h2>Generate Article</h2>
+        <label for="keyword">Keyword / Topic</label>
+        <input id="keyword" placeholder="fastapi vs django" />
+
+        <div class="row" style="margin-top: 10px;">
+          <div>
+            <label for="language">Language</label>
+            <select id="language">
+              <option value="vi">vi</option>
+              <option value="en">en</option>
+            </select>
+          </div>
+          <div>
+            <label for="tone">Tone</label>
+            <select id="tone">
+              <option value="professional">professional</option>
+              <option value="friendly">friendly</option>
+              <option value="expert">expert</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="actions">
+          <button id="btn-generate" class="btn-main">Generate</button>
+          <button id="btn-clear" class="btn-outline">Clear</button>
+        </div>
+        <div id="generate-log" class="log"></div>
+      </article>
+
+      <article class="card">
+        <h2>Publish Draft</h2>
+        <label for="article-id">Article ID</label>
+        <input id="article-id" placeholder="Auto-fill after generate" />
+        <div class="actions" style="margin-top: 10px;">
+          <button id="btn-publish" class="btn-secondary">Publish Draft</button>
+          <button id="btn-refresh" class="btn-outline">Refresh Detail</button>
+        </div>
+        <div id="publish-log" class="log"></div>
+      </article>
+
+      <article class="card card-wide">
+        <h2>Article Preview</h2>
+        <div class="meta">
+          <div><b>ID:</b> <span id="v-id">-</span></div>
+          <div><b>Title:</b> <span id="v-title">-</span></div>
+          <div><b>Slug:</b> <span id="v-slug">-</span></div>
+          <div><b>Meta:</b> <span id="v-meta">-</span></div>
+          <div><b>Status:</b> <span id="v-status" class="status">unknown</span></div>
+          <div><b>WP Post ID:</b> <span id="v-wp">-</span></div>
+        </div>
+        <div id="v-content" class="content"><p>No article loaded.</p></div>
+      </article>
+    </section>
+  </main>
+
+  <script>
+    const state = {
+      article: null,
+    };
+
+    const $ = (id) => document.getElementById(id);
+
+    function setLog(elId, text, type = "") {
+      const el = $(elId);
+      el.textContent = text;
+      el.style.color = type === "error" ? "#be2338" : "#455252";
+    }
+
+    function setStatus(text, mode = "") {
+      const el = $("v-status");
+      el.textContent = text;
+      el.className = `status ${mode}`.trim();
+    }
+
+    function renderArticle(article) {
+      state.article = article;
+      $("v-id").textContent = article.id ?? "-";
+      $("v-title").textContent = article.title ?? "-";
+      $("v-slug").textContent = article.slug ?? "-";
+      $("v-meta").textContent = article.meta_description ?? "-";
+      $("v-wp").textContent = article.wp_post_id || "-";
+      setStatus(article.status || "unknown", article.status === "drafted" ? "ok" : "");
+      $("v-content").innerHTML = article.content_html || "<p>No content.</p>";
+      if (article.id) {
+        $("article-id").value = article.id;
+      }
+    }
+
+    function clearView() {
+      state.article = null;
+      $("keyword").value = "";
+      $("article-id").value = "";
+      $("v-id").textContent = "-";
+      $("v-title").textContent = "-";
+      $("v-slug").textContent = "-";
+      $("v-meta").textContent = "-";
+      $("v-wp").textContent = "-";
+      setStatus("unknown");
+      $("v-content").innerHTML = "<p>No article loaded.</p>";
+      setLog("generate-log", "");
+      setLog("publish-log", "");
+    }
+
+    async function generateArticle() {
+      const keyword = $("keyword").value.trim();
+      const language = $("language").value;
+      const tone = $("tone").value;
+
+      if (!keyword) {
+        setLog("generate-log", "Please input a keyword.", "error");
+        return;
+      }
+
+      setLog("generate-log", "Generating...");
+      try {
+        const res = await fetch("/articles/generate", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ keyword, language, tone }),
+        });
+        const data = await res.json();
+        if (!res.ok) {
+          throw new Error(data.detail || "Generate failed");
+        }
+        renderArticle(data);
+        setLog("generate-log", `Generated article #${data.id}`);
+      } catch (err) {
+        setLog("generate-log", err.message, "error");
+        setStatus("error", "error");
+      }
+    }
+
+    async function publishDraft() {
+      const id = $("article-id").value.trim();
+      if (!id) {
+        setLog("publish-log", "Please input article id.", "error");
+        return;
+      }
+
+      setLog("publish-log", "Publishing draft...");
+      try {
+        const res = await fetch(`/articles/${id}/publish-draft`, { method: "POST" });
+        const data = await res.json();
+        if (!res.ok) {
+          throw new Error(data.detail || "Publish failed");
+        }
+        setLog("publish-log", `Published draft. wp_post_id=${data.wp_post_id}`);
+        await refreshDetail();
+      } catch (err) {
+        setLog("publish-log", err.message, "error");
+        setStatus("error", "error");
+      }
+    }
+
+    async function refreshDetail() {
+      const id = $("article-id").value.trim();
+      if (!id) {
+        setLog("publish-log", "Please input article id.", "error");
+        return;
+      }
+
+      try {
+        const res = await fetch(`/articles/${id}`);
+        const data = await res.json();
+        if (!res.ok) {
+          throw new Error(data.detail || "Cannot get article detail");
+        }
+        renderArticle(data);
+        setLog("publish-log", `Loaded article #${id}`);
+      } catch (err) {
+        setLog("publish-log", err.message, "error");
+        setStatus("error", "error");
+      }
+    }
+
+    $("btn-generate").addEventListener("click", generateArticle);
+    $("btn-publish").addEventListener("click", publishDraft);
+    $("btn-refresh").addEventListener("click", refreshDetail);
+    $("btn-clear").addEventListener("click", clearView);
+  </script>
+</body>
+</html>

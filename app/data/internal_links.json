@@ -1,0 +1,56 @@
+{
+  "Backend": [
+    {
+      "title": "FastAPI vs Django for backend",
+      "url": "https://itprep.com.vn/fastapi-vs-django-for-backend/"
+    }
+  ],
+  "Frontend": [
+    {
+      "title": "CSS Flexbox Grid cheat sheet",
+      "url": "https://itprep.com.vn/css-flexbox-grid-cheat-sheet/"
+    },
+    {
+      "title": "JavaScript ES6 cheat sheet",
+      "url": "https://itprep.com.vn/javascript-es6-cheat-sheet/"
+    },
+    {
+      "title": "React real DOM va virtual DOM",
+      "url": "https://itprep.com.vn/react-real-dom-va-virtual-dom/"
+    },
+    {
+      "title": "Lo trinh hoc ReactJS nam 2026",
+      "url": "https://itprep.com.vn/lo-trinh-hoc-reactjs-nam-2026/"
+    }
+  ],
+  "Career": [
+    {
+      "title": "5 mau CV IT chuan ATS 2026",
+      "url": "https://itprep.com.vn/5-mau-cv-it-chuan-ats-2026/"
+    },
+    {
+      "title": "Kinh nghiem phong van IT",
+      "url": "https://itprep.com.vn/kinh-nghiem-phong-van-it/"
+    }
+  ],
+  "AI-ML": [
+    {
+      "title": "So sanh CNN RNN va Transformer",
+      "url": "https://itprep.com.vn/so-sanh-cnn-rnn-va-transformer/"
+    },
+    {
+      "title": "Phong van machine learning",
+      "url": "https://itprep.com.vn/phong-van-machine-learning/"
+    }
+  ],
+  "Database": [
+    {
+      "title": "Kien thuc trong phong van SQL",
+      "url": "https://itprep.com.vn/kien-thuc-trong-phong-van-sql/"
+    },
+    {
+      "title": "SQL JOIN cheat sheet",
+      "url": "https://itprep.com.vn/sql-join-cheat-sheet/"
+    }
+  ]
+}
