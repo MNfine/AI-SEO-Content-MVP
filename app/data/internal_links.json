@@ -1,55 +1,75 @@
 {
   "Backend": [
     {
-      "title": "FastAPI vs Django for backend",
+      "title": "So sánh FastAPI và Django cho backend",
       "url": "https://itprep.com.vn/fastapi-vs-django-for-backend/"
+    },
+    {
+      "title": "C# là gì? Hướng dẫn cho người mới bắt đầu",
+      "url": "https://itprep.com.vn/c-sharp-la-gi-huong-dan-cho-nguoi-moi-bat-dau/"
+    },
+    {
+      "title": "Flask: Hướng dẫn micro framework Python linh hoạt",
+      "url": "https://itprep.com.vn/flask-huong-dan-micro-framework-python-linh-hoat/"
+    },
+    {
+      "title": "Phân biệt abstract class và interface trong Java",
+      "url": "https://itprep.com.vn/phan-biet-abstract-class-va-interface-trong-java/"
     }
   ],
   "Frontend": [
     {
-      "title": "CSS Flexbox Grid cheat sheet",
+      "title": "Cheat sheet CSS Flexbox và Grid",
       "url": "https://itprep.com.vn/css-flexbox-grid-cheat-sheet/"
     },
     {
-      "title": "JavaScript ES6 cheat sheet",
+      "title": "Cheat sheet JavaScript ES6",
       "url": "https://itprep.com.vn/javascript-es6-cheat-sheet/"
     },
     {
-      "title": "React real DOM va virtual DOM",
+      "title": "React: Real DOM và Virtual DOM",
       "url": "https://itprep.com.vn/react-real-dom-va-virtual-dom/"
     },
     {
-      "title": "Lo trinh hoc ReactJS nam 2026",
+      "title": "Lộ trình học ReactJS năm 2026",
       "url": "https://itprep.com.vn/lo-trinh-hoc-reactjs-nam-2026/"
+    },
+    {
+      "title": "Bộ 20 câu hỏi phỏng vấn ReactJS (phần 1)",
+      "url": "https://itprep.com.vn/bo-20-cau-hoi-phong-van-reactjs-phan-1/"
     }
   ],
   "Career": [
     {
-      "title": "5 mau CV IT chuan ATS 2026",
+      "title": "5 mẫu CV IT chuẩn ATS 2026",
       "url": "https://itprep.com.vn/5-mau-cv-it-chuan-ats-2026/"
     },
     {
-      "title": "Kinh nghiem phong van IT",
+      "title": "Kinh nghiệm phỏng vấn IT",
       "url": "https://itprep.com.vn/kinh-nghiem-phong-van-it/"
+    },
+    {
+      "title": "Cách viết CV IT chuẩn ATS",
+      "url": "https://itprep.com.vn/cach-viet-cv-it-chuan-ats/"
     }
   ],
   "AI-ML": [
     {
-      "title": "So sanh CNN RNN va Transformer",
+      "title": "So sánh CNN, RNN và Transformer",
       "url": "https://itprep.com.vn/so-sanh-cnn-rnn-va-transformer/"
     },
     {
-      "title": "Phong van machine learning",
+      "title": "Phỏng vấn Machine Learning",
       "url": "https://itprep.com.vn/phong-van-machine-learning/"
     }
   ],
   "Database": [
     {
-      "title": "Kien thuc trong phong van SQL",
+      "title": "Kiến thức trong phỏng vấn SQL",
       "url": "https://itprep.com.vn/kien-thuc-trong-phong-van-sql/"
     },
     {
-      "title": "SQL JOIN cheat sheet",
+      "title": "Cheat sheet SQL JOIN",
       "url": "https://itprep.com.vn/sql-join-cheat-sheet/"
     }
   ]

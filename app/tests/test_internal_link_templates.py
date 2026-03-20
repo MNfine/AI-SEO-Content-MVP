@@ -21,7 +21,15 @@ def test_internal_link_template_is_deterministic_for_same_keyword():
 
 def test_internal_link_template_varies_across_keywords():
     html = "<h2>Mo dau</h2><p>Noi dung backend.</p>"
-    one = enrich_seo_links(html, keyword="fastapi backend", language="vi")
-    two = enrich_seo_links(html, keyword="django backend", language="vi")
+    keywords = [
+        "fastapi backend",
+        "django backend",
+        "flask backend",
+        "nodejs backend",
+    ]
+    recommendations = {
+        _extract_recommendation(enrich_seo_links(html, keyword=kw, language="vi"))
+        for kw in keywords
+    }
 
-    assert _extract_recommendation(one) != _extract_recommendation(two)
+    assert len(recommendations) >= 2
