@@ -1,24 +1,29 @@
+
 # AI SEO Content MVP
 
-FastAPI MVP de tao bai SEO bang AI, luu database va day len WordPress o trang thai Draft.
+Dự án MVP tạo bài viết SEO bằng AI, lưu vào cơ sở dữ liệu và đẩy lên WordPress ở trạng thái nháp.
 
-## Tinh nang trong MVP
-- POST `/articles/generate`: nhan keyword va sinh noi dung bai viet
-- POST `/articles/{id}/publish-draft`: day bai viet len WordPress dang draft
-- GET `/articles`: danh sach bai viet
-- GET `/articles/{id}`: chi tiet bai viet
+## Tính năng nổi bật
+- Gợi ý chủ đề hot (trending) lấy trực tiếp từ GitHub Trending, có số sao tăng, mô tả repo, dịch mô tả sang tiếng Việt.
+- UI hiển thị loading khi tải chủ đề gợi ý, chọn nhanh chủ đề để sinh bài viết.
+- Khi sinh bài viết, trending_topics chỉ gửi tên repo (không gửi object).
+- Tên repo giữ nguyên, chỉ dịch phần mô tả (description).
+- POST `/articles/generate`: nhận keyword và sinh nội dung bài viết
+- POST `/articles/{id}/publish-draft`: đẩy bài viết lên WordPress dạng draft
+- GET `/articles`: danh sách bài viết
+- GET `/articles/{id}`: chi tiết bài viết
 - GET `/health`: health check
-- GET `/`: giao dien nho de generate va publish truc tiep
-- Sinh 2-3 anh minh hoa SVG theo chu de (uu tien Gemini, co fallback local)
-- Tu dong bo sung internal links tu kho link co san theo danh muc (khong tao link noi bo ao)
+- GET `/`: giao diện nhỏ để generate và publish trực tiếp
+- Sinh 2-3 ảnh minh họa SVG theo chủ đề (ưu tiên Gemini, có fallback local)
+- Tự động bổ sung internal links từ kho link có sẵn theo danh mục (không tạo link nội bộ ảo)
 
-## Cong nghe
+## Công nghệ sử dụng
 - FastAPI
 - SQLAlchemy + SQLite
-- Gemini API (co fallback noi dung mau neu chua set key)
+- Gemini API (có sinh nội dung mẫu nếu chưa cấu hình key)
 - WordPress REST API
 
-## Cau truc thu muc
+## Cấu trúc thư mục
 ```text
 app/
   main.py
@@ -31,11 +36,15 @@ app/
     schemas.py
   routes/
     articles.py
+    suggest_topics.py
   services/
     gemini_service.py
     article_service.py
     wordpress_service.py
     slug_service.py
+    tavily_service.py
+    github_trending_service.py
+    translate_service.py
   prompts/
     article_prompt.txt
   utils/
@@ -50,14 +59,14 @@ requirements.txt
 README.md
 ```
 
-## Cai dat
+## Cài đặt
 ```bash
 python -m venv .venv
 .venv\Scripts\activate
 pip install -r requirements.txt
 ```
 
-## Bien moi truong
+## Biến môi trường
 - `APP_ENV`
 - `DATABASE_URL`
 - `GEMINI_API_KEY`
@@ -65,31 +74,31 @@ pip install -r requirements.txt
 - `WORDPRESS_BASE_URL`
 - `WORDPRESS_USERNAME`
 - `WORDPRESS_APP_PASSWORD`
-- `WORDPRESS_MOCK_PUBLISH` (mac dinh `true` cho local demo)
+- `WORDPRESS_MOCK_PUBLISH` (mặc định `true` cho demo local)
 - `REQUEST_TIMEOUT`
 
-## Quan ly Internal Links
-- File link noi bo: `app/data/internal_links.json`
-- File template cau goi y internal link: `app/data/internal_link_templates.json`
-- Danh muc hien tai: `Backend`, `Frontend`, `Career`, `AI-ML`, `Database`
-- He thong chi lay internal link tu file nay de gan vao bai viet.
-- Neu can cap nhat link, chi sua file JSON tren, khong can sua code.
-- Team content co the chinh 7+ mau cau trong file template JSON ma khong can sua code.
-- Trong file template co the tuy bien theo:
-  - `vi`: mau cau tieng Viet chung
-  - `vi_by_category`: mau cau theo tung danh muc (Backend/Frontend/...)
-  - `vi_intent_context`: tien to theo intent bai viet (phong van, tutorial, so sanh...)
+## Quản lý Internal Links (liên kết nội bộ)
+- File link nội bộ: `app/data/internal_links.json`
+- File template câu gợi ý internal link: `app/data/internal_link_templates.json`
+- Danh mục hiện tại: `Backend`, `Frontend`, `Career`, `AI-ML`, `Database`
+- Hệ thống chỉ lấy internal link từ file này để gắn vào bài viết.
+- Nếu cần cập nhật link, chỉ sửa file JSON trên, không cần sửa code.
+- Team content có thể chỉnh nhiều mẫu câu trong file template JSON mà không cần sửa code.
+- Trong file template có thể tùy biến theo:
+  - `vi`: mẫu câu tiếng Việt chung
+  - `vi_by_category`: mẫu câu theo từng danh mục (Backend/Frontend/...)
+  - `vi_intent_context`: tiền tố theo intent bài viết (phỏng vấn, tutorial, so sánh...)
 
-Neu chua co WordPress credentials, giu `WORDPRESS_MOCK_PUBLISH=true` de van test full flow publish.
-Khi co WordPress that, dat `WORDPRESS_MOCK_PUBLISH=false` va dien day du 3 bien WordPress.
+Nếu chưa có tài khoản WordPress, giữ `WORDPRESS_MOCK_PUBLISH=true` để vẫn test được toàn bộ luồng publish.
+Khi có WordPress thật, đặt `WORDPRESS_MOCK_PUBLISH=false` và điền đầy đủ 3 biến WordPress.
 
-## Chay ung dung
+## Chạy ứng dụng
 ```bash
 uvicorn app.main:app --reload
 ```
 
-Truy cap Swagger: `http://127.0.0.1:8000/docs`
-Truy cap giao dien: `http://127.0.0.1:8000/`
+Truy cập Swagger: `http://127.0.0.1:8000/docs`
+Truy cập giao diện: `http://127.0.0.1:8000/`
 
 ## API nhanh
 ### Generate
@@ -100,25 +109,31 @@ Content-Type: application/json
 {
   "keyword": "fastapi vs django",
   "language": "vi",
-  "tone": "professional"
+  "tone": "professional",
+  "trending_topics": ["repo1", "repo2", ...] // chỉ gửi tên repo, không gửi object
 }
 ```
 
-### Publish Draft
+### Lưu ý UI
+- Chủ đề gợi ý sẽ hiển thị tên repo (giữ nguyên), mô tả đã dịch, số sao tăng, link repo.
+- Khi chọn chủ đề, chỉ tên repo được đưa vào ô keyword.
+- Có hiệu ứng loading khi đang tải chủ đề trending.
+
+### Đăng draft lên WordPress
 ```http
 POST /articles/1/publish-draft
 ```
 
-## Chay test
+## Chạy test
 ```bash
 pytest -q
 ```
 
 ## Debug Gemini
-- Khi Gemini tra ve output sai format JSON, he thong se fallback (neu `GEMINI_STRICT_ERRORS=false`).
-- Raw response rut gon duoc luu tai: `logs/gemini_raw_responses.jsonl` de debug prompt/model.
+- Khi Gemini trả về output sai format JSON, hệ thống sẽ tự động fallback (nếu `GEMINI_STRICT_ERRORS=false`).
+- Raw response rút gọn được lưu tại: `logs/gemini_raw_responses.jsonl` để debug prompt/model.
 
-## Ghi chu bao mat
-- Khong commit file `.env`
-- Dung WordPress Application Password
-- Khong ghi log secret
+## Ghi chú bảo mật
+- Không commit file `.env`
+- Dùng WordPress Application Password
+- Không ghi log chứa thông tin bí mật
