@@ -7,6 +7,7 @@ class GenerateArticleRequest(BaseModel):
     keyword: str = Field(min_length=3, max_length=255)
     language: str = Field(default="vi", min_length=2, max_length=10)
     tone: str = Field(default="professional", min_length=2, max_length=30)
+    trending_topics: list[str] = Field(default_factory=list)
 
 
 class ArticleBase(BaseModel):

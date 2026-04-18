@@ -1,3 +1,8 @@
+
+# Nạp biến môi trường từ file .env
+from dotenv import load_dotenv
+load_dotenv()
+
 from collections.abc import AsyncGenerator
 from contextlib import asynccontextmanager
 from pathlib import Path
@@ -8,6 +13,7 @@ from fastapi.responses import FileResponse
 from app.core.logging_config import setup_logging
 from app.db.database import Base, engine
 from app.routes.articles import router as article_router
+from app.routes.suggest_topics import router as suggest_topics_router
 
 setup_logging()
 
@@ -33,3 +39,4 @@ def frontend() -> FileResponse:
 
 
 app.include_router(article_router)
+app.include_router(suggest_topics_router)

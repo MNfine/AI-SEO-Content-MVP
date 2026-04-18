@@ -331,13 +331,113 @@ class GeminiService:
     def __init__(self) -> None:
         self.settings = get_settings()
 
-    def _build_local_fallback(
-        self,
-        keyword: str,
-        language: str,
-        tone: str,
-        intent: ArticleIntent | None = None,
-    ) -> dict:
+    def generate_article(self, keyword: str, language: str, tone: str, trending_topics: list[str] = None) -> dict:
+        global _GEMINI_BACKOFF_UNTIL
+
+        intent = detect_article_intent(keyword)
+        logger.info("generate_article keyword=%r language=%r tone=%r intent=%s trending_topics=%r", keyword, language, tone, intent.value, trending_topics)
+
+        if not self.settings.gemini_api_key:
+            logger.warning("Gemini API key missing, using fallback")
+            return self._fallback_with_illustrations(keyword, language, tone, intent)
+
+        now = datetime.now(UTC)
+        if _GEMINI_BACKOFF_UNTIL and now < _GEMINI_BACKOFF_UNTIL:
+            logger.warning("Gemini backoff active until %s, using fallback", _GEMINI_BACKOFF_UNTIL.isoformat())
+            return self._fallback_with_illustrations(keyword, language, tone, intent)
+
+        try:
+            genai.configure(api_key=self.settings.gemini_api_key)
+
+            primary_model = self._resolve_model_name()
+            logger.info("Resolved Gemini model: %s", primary_model)
+
+            prompt = self._build_gemini_prompt(keyword, language, tone, intent, trending_topics=trending_topics)
+            logger.debug("Gemini prompt length=%d", len(prompt))
+
+            last_exc: Exception | None = None
+            model_name = primary_model
+            raw_text = ""
+            payload: dict | None = None
+
+            candidates = _candidate_models(primary_model)
+            for index, candidate_model in enumerate(candidates):
+                model_name = candidate_model
+                try:
+                    model = genai.GenerativeModel(candidate_model)
+                    response = model.generate_content(
+                        prompt,
+                        generation_config={
+                            "response_mime_type": "application/json",
+                            "temperature": 0.6,
+                        },
+                    )
+                    raw_text = _extract_text_from_response(response)
+                    logger.debug("Gemini raw response preview=%s", raw_text[:1200])
+
+                    payload = _extract_json_block(raw_text)
+                    break
+                except Exception as exc:
+                    last_exc = exc
+                    if (_is_quota_error(exc) or _is_model_not_found_error(exc)) and index < len(candidates) - 1:
+                        logger.warning(
+                            "Model %s failed with retryable error (%s); trying fallback model",
+                            candidate_model,
+                            type(exc).__name__,
+                        )
+                        continue
+                    raise
+
+            if payload is None:
+                if last_exc:
+                    raise last_exc
+                raise ValueError("Gemini did not return a valid payload")
+
+            payload = _validate_payload(payload, keyword)
+            self._save_raw_response_debug(
+                keyword=keyword,
+                intent=intent,
+                model_name=model_name,
+                prompt=prompt,
+                raw_text=raw_text,
+                status="ok",
+            )
+            return payload
+        except Exception as exc:
+            self._save_raw_response_debug(
+                keyword=keyword,
+                intent=intent,
+                model_name="error",
+                prompt="(error)",
+                raw_text=str(exc),
+                status="error",
+                error=str(exc),
+            )
+            logger.exception("Gemini generate_article failed")
+            return self._fallback_with_illustrations(keyword, language, tone, intent)
+
+    def _build_gemini_prompt(self, keyword: str, language: str, tone: str, intent: ArticleIntent, trending_topics: list[str] = None) -> str:
+        template = _prompt_template(intent)
+        trending_note = ""
+        if trending_topics:
+            trending_note = (
+                "\n\nLưu ý: Dưới đây là các chủ đề, công nghệ, từ khóa đang rất hot trên GitHub và cộng đồng dev hiện tại. "
+                "Nếu có liên quan, hãy ưu tiên phân tích, so sánh, hoặc nhắc đến các chủ đề này trong bài viết để tăng tính cập nhật, hữu ích cho người đọc.\n"
+                + "- " + "\n- ".join(trending_topics[:10])
+            )
+        rendered = _render_prompt(template, keyword=keyword, language=language, tone=tone)
+        schema_instruction = """
+Return exactly one JSON object and nothing else.
+Do not wrap the JSON in markdown fences.
+Required JSON fields:
+- title: string
+- slug: string
+- meta_description: string
+- excerpt: string
+- content_html: string
+The content_html must contain valid semantic HTML with headings, paragraphs, and at least one FAQ section.
+""".strip()
+        return f"{rendered}{trending_note}\n\n{schema_instruction}"
         resolved_intent = intent or detect_article_intent(keyword)
         keyword_plain = _sanitize_plain_text(keyword)
         keyword_html = escape(keyword_plain)

@@ -318,6 +318,16 @@
         <h2>Generate Article</h2>
         <label for="keyword">Keyword / Topic</label>
         <input id="keyword" placeholder="fastapi vs django" />
+        <div style="margin: 10px 0 0 0;">
+          <label for="period" style="font-size:0.93em;color:#455252;margin-right:8px;">Trending theo:</label>
+          <select id="period" style="font-size:0.97em;padding:4px 10px;border-radius:8px;border:1.5px solid #cab498;">
+            <option value="week">Tuần này</option>
+            <option value="month">Tháng này</option>
+            <option value="year">Năm nay</option>
+            <option value="day">Hôm nay</option>
+          </select>
+        </div>
+        <div id="topic-suggestions" style="margin: 10px 0 0 0;"></div>
 
         <div class="row" style="margin-top: 10px;">
           <div>
@@ -418,6 +428,57 @@
       setLog("publish-log", "");
     }
 
+
+
+    let trendingTopics = [];
+    let trendingPeriod = "week";
+
+    async function fetchTrendingTopics() {
+      renderTopicSuggestions(true);
+      try {
+        const res = await fetch(`/suggest-topics?period=${encodeURIComponent(trendingPeriod)}`);
+        const data = await res.json();
+        if (Array.isArray(data)) {
+          trendingTopics = data;
+          renderTopicSuggestions();
+        } else {
+          renderTopicSuggestions();
+        }
+      } catch (err) {
+        renderTopicSuggestions();
+      }
+    }
+
+    $("period").addEventListener("change", function(e) {
+      trendingPeriod = this.value;
+      fetchTrendingTopics();
+    });
+
+    function renderTopicSuggestions(loading = false) {
+      const el = $("topic-suggestions");
+      if (loading) {
+        el.innerHTML = `<div style="margin-bottom:6px;font-size:0.93em;color:#455252;">Đang tải chủ đề hot trên GitHub... <span class="loader"></span></div>`;
+        return;
+      }
+      if (!trendingTopics.length) {
+        el.innerHTML = "";
+        return;
+      }
+      el.innerHTML = `<div style="margin-bottom:6px;font-size:0.93em;color:#455252;">Gợi ý chủ đề hot trên GitHub:</div>`
+        + trendingTopics.map((t, i) => {
+          // t: {name, url, description, stars, stars_in_period, vi_title, vi_description}
+          const title = t.vi_title || t.name;
+          const desc = t.vi_description || t.description || "";
+          const stars = t.stars_in_period || t.stars || 0;
+          const url = t.url || "#";
+          return `<div class="topic-chip" style="display:block;background:#f8eddc;border-radius:14px;padding:8px 14px;margin:6px 0;cursor:pointer;border:1px solid #cab498;font-size:1em;transition:background 0.2s;\" onclick="document.getElementById('keyword').value='${title.replace(/'/g, "\'")}';\">
+            <div style="font-weight:600;color:#006d5b;font-size:1.07em;">${title}</div>
+            <div style="color:#444;font-size:0.97em;margin:2px 0 2px 0;">${desc}</div>
+            <div style="font-size:0.93em;color:#888;">⭐ ${stars} <a href="${url}" target="_blank" style="color:#006d5b;text-decoration:underline;margin-left:8px;">Repo</a></div>
+          </div>`;
+        }).join("");
+    }
+
     async function generateArticle() {
       const keyword = $("keyword").value.trim();
       const language = $("language").value;
@@ -433,7 +494,7 @@
         const res = await fetch("/articles/generate", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ keyword, language, tone }),
+          body: JSON.stringify({ keyword, language, tone, trending_topics: trendingTopics }),
         });
         const data = await res.json();
         if (!res.ok) {
@@ -491,6 +552,7 @@
     }
 
     $("btn-generate").addEventListener("click", generateArticle);
+    fetchTrendingTopics();
     $("btn-publish").addEventListener("click", publishDraft);
     $("btn-refresh").addEventListener("click", refreshDetail);
     $("btn-clear").addEventListener("click", clearView);
