@@ -25,7 +25,7 @@ def get_trending_github_topics(limit: int = 10, period: str = "week") -> list:
     repos = get_github_trending_repos(period=trending_period, limit=limit)
     topics = []
     for repo in repos:
-        vi_title = translate_text_vi(repo["name"])
+        # Giữ nguyên tên repo, chỉ dịch description
         vi_description = translate_text_vi(repo["description"])
         topics.append({
             "name": repo["name"],
@@ -33,7 +33,7 @@ def get_trending_github_topics(limit: int = 10, period: str = "week") -> list:
             "description": repo["description"],
             "stars": repo["stars"],
             "stars_in_period": repo["stars_in_period"],
-            "vi_title": vi_title,
+            "vi_title": repo["name"],
             "vi_description": vi_description,
         })
     return topics
