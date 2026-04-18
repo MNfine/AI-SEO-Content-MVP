@@ -491,10 +491,11 @@
 
       setLog("generate-log", "Generating...");
       try {
+        const trendingTopicNames = trendingTopics.map(t => t.name);
         const res = await fetch("/articles/generate", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ keyword, language, tone, trending_topics: trendingTopics }),
+          body: JSON.stringify({ keyword, language, tone, trending_topics: trendingTopicNames }),
         });
         const data = await res.json();
         if (!res.ok) {
