@@ -5,5 +5,7 @@ pydantic==2.9.2
 pydantic-settings==2.5.2
 requests==2.32.3
 google-generativeai==0.8.3
+beautifulsoup4
+googletrans==4.0.0rc1
 pytest==8.3.3
 httpx==0.27.2
