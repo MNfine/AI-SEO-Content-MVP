@@ -16,6 +16,23 @@
       "title": "Phân biệt abstract class và interface trong Java",
       "url": "https://itprep.com.vn/phan-biet-abstract-class-va-interface-trong-java/"
     }
+    ,
+    {
+      "title": "API Gateway là gì - Hướng dẫn toàn diện",
+      "url": "https://itprep.com.vn/api-gateway-la-gi-huong-dan-toan-dien/"
+    },
+    {
+      "title": "Docker là gì - Lộ trình học Docker cho người mới bắt đầu",
+      "url": "https://itprep.com.vn/docker-la-gi-lo-trinh-hoc-docker-cho-nguoi-moi-bat-dau/"
+    },
+    {
+      "title": "DevOps là gì - Hướng dẫn chuyên sâu",
+      "url": "https://itprep.com.vn/devops-la-gi-huong-dan-chuyen-sau/"
+    },
+    {
+      "title": "Ruby Gem - Hướng dẫn sử dụng và phát triển hiệu quả",
+      "url": "https://itprep.com.vn/ruby-gem-huong-dan-su-dung-phat-trien-hieu-qua/"
+    }
   ],
   "Frontend": [
     {
@@ -38,6 +55,23 @@
       "title": "Bộ 20 câu hỏi phỏng vấn ReactJS (phần 1)",
       "url": "https://itprep.com.vn/bo-20-cau-hoi-phong-van-reactjs-phan-1/"
     }
+    ,
+    {
+      "title": "Bun.js - Hướng dẫn toàn diện & ứng dụng thực tế",
+      "url": "https://itprep.com.vn/bun-js-huong-dan-toan-dien-ung-dung-thuc-te/"
+    },
+    {
+      "title": "Zod - Hướng dẫn chuyên sâu về xác thực schema trong TypeScript",
+      "url": "https://itprep.com.vn/zod-huong-dan-chuyen-sau-ve-thu-vien-xac-thuc-schema-manh-me-trong-typescript/"
+    },
+    {
+      "title": "Flutter - Hướng dẫn chuyên sâu & kiến trúc triển khai",
+      "url": "https://itprep.com.vn/flutter-huong-dan-chuyen-sau-kien-truc-trien-khai/"
+    },
+    {
+      "title": "SEO chuyên sâu - Hướng dẫn thực chiến tối ưu",
+      "url": "https://itprep.com.vn/seo-chuyen-sau-huong-dan-thuc-chien-toi-uu/"
+    }
   ],
   "Career": [
     {
@@ -52,6 +86,31 @@
       "title": "Cách viết CV IT chuẩn ATS",
       "url": "https://itprep.com.vn/cach-viet-cv-it-chuan-ats/"
     }
+    ,
+    {
+      "title": "Lộ trình Intern Fullstack Developer năm nhất",
+      "url": "https://itprep.com.vn/lo-trinh-intern-fullstack-developer-nam-nhat/"
+    },
+    {
+      "title": "Các dự án cho sinh viên IT - Xây dựng portfolio",
+      "url": "https://itprep.com.vn/cac-du-an-cho-sinh-vien-it-xay-dung-portfolio/"
+    },
+    {
+      "title": "Fresher IT cần gì - Lộ trình & kỹ năng thiết yếu",
+      "url": "https://itprep.com.vn/fresher-it-can-gi-lo-trinh-ky-nang-thiet-yeu/"
+    },
+    {
+      "title": "Khảo sát nhà phát triển Stack Overflow 2025",
+      "url": "https://itprep.com.vn/khao-sat-nha-phat-trien-stack-overflow-2025/"
+    },
+    {
+      "title": "Notion cho dân IT",
+      "url": "https://itprep.com.vn/notion-cho-dan-it/"
+    },
+    {
+      "title": "Vibe Coding - Phân tích & hướng dẫn",
+      "url": "https://itprep.com.vn/vibe-coding-la-tot-hay-xau-phan-tich-huong-dan/"
+    }
   ],
   "AI-ML": [
     {
@@ -62,6 +121,35 @@
       "title": "Phỏng vấn Machine Learning",
       "url": "https://itprep.com.vn/phong-van-machine-learning/"
     }
+    ,
+    {
+      "title": "Model inversion attack - Khái niệm và phân tích",
+      "url": "https://itprep.com.vn/model-inversion-attack/"
+    },
+    {
+      "title": "Bạn biết gì về các model LLM - Khám phá sâu sắc",
+      "url": "https://itprep.com.vn/ban-biet-gi-ve-cac-model-llm-kham-pha-sau-sac/"
+    },
+    {
+      "title": "Bác sĩ AI - Ứng dụng và tiềm năng trong y tế",
+      "url": "https://itprep.com.vn/bac-si-ai-ung-dung-va-tiem-nang-y-te/"
+    },
+    {
+      "title": "Kỹ sư AI tác tử - Agentic AI Engineer (Hướng dẫn 2026)",
+      "url": "https://itprep.com.vn/ky-su-ai-tac-tu-agentic-ai-engineer-huong-dan-2026/"
+    },
+    {
+      "title": "Prompt engineering cho developer - 2026",
+      "url": "https://itprep.com.vn/prompt-engineering-developer-2026/"
+    },
+    {
+      "title": "LangGraph - Hướng dẫn toàn diện",
+      "url": "https://itprep.com.vn/langgraph-la-gi-huong-dan-toan-dien/"
+    },
+    {
+      "title": "GraphRAG - Hướng dẫn chuyên sâu và tối ưu hóa",
+      "url": "https://itprep.com.vn/graphrag-huong-dan-chuyen-sau-va-toi-uu-hoa/"
+    }
   ],
   "Database": [
     {
@@ -71,6 +159,27 @@
     {
       "title": "Cheat sheet SQL JOIN",
       "url": "https://itprep.com.vn/sql-join-cheat-sheet/"
+    }
+    ,
+    {
+      "title": "Lộ trình học Redis toàn diện",
+      "url": "https://itprep.com.vn/lo-trinh-hoc-redis-toan-dien/"
+    },
+    {
+      "title": "ACID và Transaction - nguyên lý và ứng dụng thực tiễn",
+      "url": "https://itprep.com.vn/acid-va-transaction-nguyen-ly-ung-dung-thuc-tien/"
+    },
+    {
+      "title": "MongoDB thực chiến - hướng dẫn chuyên sâu",
+      "url": "https://itprep.com.vn/mongodb-thuc-chien-huong-dan-chuyen-sau/"
+    },
+    {
+      "title": "NoSQL là gì - hướng dẫn cơ sở dữ liệu phi quan hệ",
+      "url": "https://itprep.com.vn/nosql-la-gi-huong-dan-co-so-du-lieu-phi-quan-he/"
+    },
+    {
+      "title": "PostgreSQL - Hướng dẫn chuyên sâu và tối ưu kiến trúc",
+      "url": "https://itprep.com.vn/postgresql-huong-dan-chuyen-sau-kien-truc-toi-uu-ung-dung-3/"
     }
   ]
 }
